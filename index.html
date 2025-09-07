@@ -3,183 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yaji | 王亞婕</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <title>heyaji</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* CSS 變數定義，方便你自訂顏色 */
+        /* CSS 變數：方便你調整顏色 */
         :root {
-            --bg-color: #f7f3e9; /* 溫暖的米白色 */
-            --main-text-color: #333333; /* 柔和的深灰色 */
-            --accent-color: #c94c4c; /* 復古紅 */
-            --line-color: #e0d9c4; /* 淺線條色 */
+            --bg-color: #f7f3e9; /* 淺米色背景，像紙張 */
+            --main-text-color: #333;
+            --accent-color-1: #5d5c61; /* 深灰色，像鉛筆線 */
+            --accent-color-2: #65a198; /* 淺藍綠色 */
+            --accent-color-3: #c94c4c; /* 復古紅 */
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--main-text-color);
-            font-family: 'Noto Sans JP', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
             margin: 0;
+            padding: 50px;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding: 20px;
         }
 
-        /* 乾淨、有創意的背景圖形 */
-        .background-svg {
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            opacity: 0.3;
-            z-index: 0;
-            transform: rotate(-15deg);
+        /* 頂部歡迎標語 */
+        .welcome-header {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            color: var(--accent-color-1);
+            margin-bottom: 50px;
         }
 
-        /* 主要內容容器 */
-        .container {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto auto;
-            gap: 40px;
-            max-width: 800px;
-            width: 100%;
-            padding: 50px;
-            background-color: rgba(255, 255, 255, 0.7);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .name-section {
-            text-align: center;
-        }
-
-        .name-section h1 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .slogan {
-            font-size: 1.2rem;
-            color: var(--main-text-color);
-            margin-top: 0;
-            border-bottom: 2px solid var(--line-color);
-            padding-bottom: 15px;
-            display: inline-block;
-        }
-
-        /* 資訊區塊 - 清晰的排版 */
-        .info-section {
+        /* 主要內容區塊 - 網格排版 */
+        .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 80px;
+            max-width: 1000px;
+            width: 100%;
+        }
+        
+        /* 左側 - 姓名與動態插圖 */
+        .left-panel {
+            text-align: left;
+            position: relative;
+        }
+
+        .name-yaji {
+            font-family: 'Caveat', cursive;
+            font-size: 4rem;
+            color: var(--main-text-color);
+            line-height: 1;
+        }
+
+        .name-full {
+            font-size: 2rem;
+            color: var(--accent-color-1);
+            line-height: 1;
+            font-weight: 500;
+        }
+
+        /* 動態插圖 */
+        .illustration-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .illustration-container svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .orbit-1 { animation: rotate-slow 20s linear infinite; }
+        .orbit-2 { animation: rotate-fast 15s linear infinite reverse; }
+
+        @keyframes rotate-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes rotate-fast { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* 右側 - 個人資訊 */
+        .right-panel {
             text-align: left;
         }
 
-        .info-group h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            border-left: 3px solid var(--accent-color);
-            padding-left: 10px;
-            margin-bottom: 15px;
-        }
-
-        .info-item p {
-            font-size: 1rem;
-            line-height: 1.5;
-            margin: 5px 0;
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent-color-2);
+            border-bottom: 2px solid var(--accent-color-2);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
         }
         
-        .info-item span {
-            font-weight: 700;
-            color: var(--main-text-color);
+        .info-block {
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .info-item .label {
+            font-weight: 500;
+            color: var(--accent-color-3);
         }
 
         .email-link {
             color: var(--main-text-color);
             text-decoration: none;
-            border-bottom: 1px solid var(--main-text-color);
+            border-bottom: 1px dashed var(--main-text-color);
             transition: color 0.3s;
         }
+
         .email-link:hover {
-            color: var(--accent-color);
-            border-bottom-color: var(--accent-color);
+            color: var(--accent-color-3);
+            border-bottom-color: var(--accent-color-3);
         }
 
         /* RWD 響應式設計 */
         @media (max-width: 768px) {
-            .container {
-                padding: 30px;
-            }
-            .name-section h1 {
-                font-size: 3rem;
-            }
-            .slogan {
-                font-size: 1rem;
-            }
-            .info-section {
+            body { padding: 30px 20px; }
+            .main-content {
                 grid-template-columns: 1fr;
+                gap: 50px;
             }
-            .background-svg {
-                display: none;
-            }
+            .welcome-header { margin-bottom: 30px; }
+            .illustration-container { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <svg class="background-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 50,2 L 98,50 L 50,98 L 2,50 L 50,2 Z" fill="none" stroke="currentColor" stroke-width="2" />
-        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" />
-        <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="1" />
-        <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" stroke-width="1" />
-    </svg>
+    <h1 class="welcome-header">歡迎大家進入我的主頁</h1>
 
-    <div class="container">
-        <div class="name-section">
-            <h1>王亞婕</h1>
-            <p class="slogan">歡迎大家進入我的主頁</p>
-        </div>
-
-        <div class="info-section">
-            <div class="info-group">
-                <h3>關於我</h3>
-                <p>一個數位探索者，希望能創造令人印象深刻的視覺體驗。</p>
-            </div>
-            <div class="info-group">
-                <h3>個人資訊</h3>
-                <div class="info-item">
-                    <p><span>出生日期：</span>2003/01/14</p>
-                    <p><span>電話：</span>更新中...</p>
-                    <p><span>社群：</span>更新中...</p>
-                    <p><span>Email：</span><a href="mailto:heyaji.w@gmail.com" class="email-link">heyaji.w@gmail.com</a></p>
-                </div>
+    <div class="main-content">
+        <div class="left-panel">
+            <h2 class="name-full">我是王亞建</h2>
+            <h1 class="name-yaji">hey I'm yaji :)</h1>
+            
+            <div class="illustration-container">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent-color-1)" stroke-width="1" class="orbit-1"></circle>
+                    <circle cx="50" cy="50" r="35" fill="none" stroke="var(--accent-color-2)" stroke-width="1" class="orbit-2"></circle>
+                    <circle cx="50" cy="50" r="25" fill="none" stroke="var(--accent-color-3)" stroke-width="1" class="orbit-1"></circle>
+                </svg>
             </div>
         </div>
         
-        <div class="info-section">
-            <div class="info-group">
+        <div class="right-panel">
+            <div class="info-block">
+                <h3 class="info-title">About me</h3>
+                <p>一個數位探索者，希望能創造令人印象深刻的視覺體驗。</p>
+            </div>
+
+            <div class="info-block">
+                <h3 class="info-title">個人資訊</h3>
+                <p class="info-item"><span class="label">出生日期：</span>2003/01/14</p>
+                <p class="info-item"><span class="label">電話：</span>更新中...</p>
+                <p class="info-item"><span class="label">社群：</span>更新中...</p>
+                <p class="info-item"><span class="label">Email：</span><a href="mailto:heyaji.w@gmail.com" class="email-link">heyaji.w@gmail.com</a></p>
             </div>
         </div>
     </div>
-
 </body>
 </html>
