@@ -3,179 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王亞婕 | Digital Avant-garde</title>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>yaji | 王亞婕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* CSS 變數定義，方便你自訂顏色 */
         :root {
-            --bg-color: #111;
-            --main-color: #00FFFF; /* 亮青色 */
-            --accent-color: #FF00FF; /* 亮洋紅色 */
-            --text-color: #f0f0f0;
+            --bg-color: #f7f3e9; /* 溫暖的米白色 */
+            --main-text-color: #333333; /* 柔和的深灰色 */
+            --accent-color: #c94c4c; /* 復古紅 */
+            --line-color: #e0d9c4; /* 淺線條色 */
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Share Tech Mono', monospace; /* 主體文字使用 monospace */
+            color: var(--main-text-color);
+            font-family: 'Noto Sans JP', sans-serif;
             margin: 0;
-            padding: 20px;
-            display: grid;
-            grid-template-areas:
-                "name name"
-                "info contact";
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
             min-height: 100vh;
+            display: flex;
             justify-content: center;
-            align-content: center;
+            align-items: center;
             position: relative;
             overflow: hidden;
+            padding: 20px;
         }
 
-        /* 數位雜訊背景動畫 */
-        body::before {
-            content: '';
+        /* 乾淨、有創意的背景圖形 */
+        .background-svg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" stitchTiles="stitch" /></filter><rect width="100" height="100" filter="url(#n)" opacity="0.1" /></svg>');
-            animation: noise 1s steps(10) infinite;
-            z-index: -1;
-        }
-        @keyframes noise {
-            0%, 100% { background-position: 0 0; }
-            10% { background-position: -5% -5%; }
-            20% { background-position: -15% 5%; }
-            30% { background-position: 7% -25%; }
-            40% { background-position: 20% 25%; }
-            50% { background-position: -25% 10%; }
-            60% { background-position: 15% -5%; }
-            70% { background-position: -5% 20%; }
-            80% { background-position: 25% -25%; }
-            90% { background-position: -10% -20%; }
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.3;
+            z-index: 0;
+            transform: rotate(-15deg);
         }
 
-        /* 核心姓名區塊 */
-        .name-container {
-            grid-area: name;
+        /* 主要內容容器 */
+        .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 40px;
+            max-width: 800px;
+            width: 100%;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .name-section {
             text-align: center;
-            font-family: 'Exo 2', sans-serif;
-            font-size: 10vw;
-            line-height: 1.1;
+        }
+
+        .name-section h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 4rem;
             font-weight: 700;
-            color: var(--main-color);
-            text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color);
-            animation: glitch-anim 2s infinite linear alternate;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .slogan {
+            font-size: 1.2rem;
+            color: var(--main-text-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--line-color);
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* 資訊區塊 - 清晰的排版 */
+        .info-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            text-align: left;
+        }
+
+        .info-group h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-item p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 5px 0;
         }
         
-        .name-container span.glitch {
-            position: relative;
-            z-index: 10;
-        }
-
-        /* 故障效果動畫 */
-        .name-container::before, .name-container::after {
-            content: 'yaji';
-            position: absolute;
-            top: 0;
-            left: 0;
-            text-shadow: none;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-        .name-container::before {
-            color: var(--accent-color);
-            z-index: 5;
-            animation: glitch-before 1.5s infinite linear alternate-reverse;
-        }
-        .name-container::after {
-            color: #FFFF00;
-            z-index: 6;
-            animation: glitch-after 2s infinite linear alternate;
-        }
-
-        @keyframes glitch-anim {
-            0% { transform: skewX(0deg); }
-            100% { transform: skewX(5deg); }
-        }
-        @keyframes glitch-before {
-            0% { clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%); transform: translate(10px, -5px); }
-            100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: translate(-10px, 5px); }
-        }
-        @keyframes glitch-after {
-            0% { clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%); transform: translate(-10px, 5px); }
-            100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: translate(10px, -5px); }
-        }
-
-        /* 資訊區塊 */
-        .info-section {
-            grid-area: info;
-            text-align: left;
-            margin-top: 50px;
-        }
-        .contact-section {
-            grid-area: contact;
-            text-align: left;
-            margin-top: 50px;
-        }
-
-        h2 {
-            font-size: 2rem;
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            margin: 10px 0;
-            font-size: 1.1rem;
+        .info-item span {
+            font-weight: 700;
+            color: var(--main-text-color);
         }
 
         .email-link {
-            color: var(--main-color);
+            color: var(--main-text-color);
             text-decoration: none;
-            border-bottom: 1px dashed var(--main-color);
+            border-bottom: 1px solid var(--main-text-color);
             transition: color 0.3s;
         }
         .email-link:hover {
             color: var(--accent-color);
-            border-bottom: 1px dashed var(--accent-color);
+            border-bottom-color: var(--accent-color);
         }
 
-        /* 響應式設計 */
+        /* RWD 響應式設計 */
         @media (max-width: 768px) {
-            body {
-                display: block;
+            .container {
+                padding: 30px;
             }
-            .info-section, .contact-section {
-                margin-top: 20px;
-                text-align: center;
+            .name-section h1 {
+                font-size: 3rem;
             }
-            .name-container {
-                font-size: 15vw;
+            .slogan {
+                font-size: 1rem;
+            }
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+            .background-svg {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <h1 class="name-container">yaji</h1>
+    <svg class="background-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 50,2 L 98,50 L 50,98 L 2,50 L 50,2 Z" fill="none" stroke="currentColor" stroke-width="2" />
+        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" />
+        <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="1" />
+        <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" stroke-width="1" />
+    </svg>
 
-    <div class="info-section">
-        <h2>About</h2>
-        <p>一個數位探索者，希望創造令人印象深刻的視覺體驗。</p>
-        <p><b>出生日期</b>: 2003/01/14</p>
-    </div>
+    <div class="container">
+        <div class="name-section">
+            <h1>王亞婕</h1>
+            <p class="slogan">歡迎大家進入我的主頁</p>
+        </div>
 
-    <div class="contact-section">
-        <h2>Contact</h2>
-        <p><b>Email</b>: <a href="mailto:heyaji.w@gmail.com" class="email-link">heyaji.w@gmail.com</a></p>
-        <p><b>電話</b>: 更新中...</p>
-        <p><b>社群</b>: 更新中...</p>
+        <div class="info-section">
+            <div class="info-group">
+                <h3>關於我</h3>
+                <p>一個數位探索者，希望能創造令人印象深刻的視覺體驗。</p>
+            </div>
+            <div class="info-group">
+                <h3>個人資訊</h3>
+                <div class="info-item">
+                    <p><span>出生日期：</span>2003/01/14</p>
+                    <p><span>電話：</span>更新中...</p>
+                    <p><span>社群：</span>更新中...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-group">
+                <h3>聯絡方式</h3>
+                <p><span>Email：</span><a href="mailto:heyaji.w@gmail.com" class="email-link">heyaji.w@gmail.com</a></p>
+            </div>
+        </div>
     </div>
 
 </body>
