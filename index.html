@@ -3,209 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yaji</title>
-    <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+    <title>王亞婕 | Digital Avant-garde</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        /* CSS 樣式區域 */
+        /* CSS 變數定義，方便你自訂顏色 */
         :root {
-            --primary-color: #f0f0f0;  /* 主色：淺灰色 */
-            --secondary-color: #1a1a1a;  /* 副色：深灰色 */
-            --accent-color: #4a90e2;   /* 點綴色：藍色 */
+            --bg-color: #111;
+            --main-color: #00FFFF; /* 亮青色 */
+            --accent-color: #FF00FF; /* 亮洋紅色 */
+            --text-color: #f0f0f0;
         }
 
         body {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace; /* 主體文字使用 monospace */
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 20px;
+            display: grid;
+            grid-template-areas:
+                "name name"
+                "info contact";
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             min-height: 100vh;
-            text-align: center;
-            overflow: hidden;
+            justify-content: center;
+            align-content: center;
             position: relative;
+            overflow: hidden;
         }
 
-        /* 抽象的幾何插圖 */
-        .illustration {
+        /* 數位雜訊背景動畫 */
+        body::before {
+            content: '';
             position: absolute;
-            width: 150px;
-            height: 150px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(0deg);
-            z-index: 0;
-            opacity: 0.15;
-            animation: spin 20s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        .illustration svg {
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" stitchTiles="stitch" /></filter><rect width="100" height="100" filter="url(#n)" opacity="0.1" /></svg>');
+            animation: noise 1s steps(10) infinite;
+            z-index: -1;
+        }
+        @keyframes noise {
+            0%, 100% { background-position: 0 0; }
+            10% { background-position: -5% -5%; }
+            20% { background-position: -15% 5%; }
+            30% { background-position: 7% -25%; }
+            40% { background-position: 20% 25%; }
+            50% { background-position: -25% 10%; }
+            60% { background-position: 15% -5%; }
+            70% { background-position: -5% 20%; }
+            80% { background-position: 25% -25%; }
+            90% { background-position: -10% -20%; }
         }
 
-        /* 內容容器 */
-        .container {
+        /* 核心姓名區塊 */
+        .name-container {
+            grid-area: name;
+            text-align: center;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 10vw;
+            line-height: 1.1;
+            font-weight: 700;
+            color: var(--main-color);
+            text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+            animation: glitch-anim 2s infinite linear alternate;
+        }
+        
+        .name-container span.glitch {
             position: relative;
-            z-index: 1;
-            max-width: 900px;
-            width: 90%;
-            padding: 20px;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
+            z-index: 10;
         }
 
-        @keyframes fadeInUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        /* 故障效果動畫 */
+        .name-container::before, .name-container::after {
+            content: 'yaji';
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-shadow: none;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
-        
-        /* 姓名和標語 */
-        .name {
-            font-family: 'Unica One', cursive;
-            font-size: 8rem;
-            line-height: 1;
-            margin: 0;
-            color: var(--primary-color);
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        .slogan {
-            font-size: 2rem;
-            letter-spacing: 2px;
-            margin-top: 10px;
+        .name-container::before {
             color: var(--accent-color);
+            z-index: 5;
+            animation: glitch-before 1.5s infinite linear alternate-reverse;
+        }
+        .name-container::after {
+            color: #FFFF00;
+            z-index: 6;
+            animation: glitch-after 2s infinite linear alternate;
         }
 
-        /* 自我介紹與聯絡方式 */
-        .intro-text {
-            font-weight: 300;
-            font-size: 1.2rem;
-            margin-top: 30px;
-            color: var(--primary-color);
-            line-height: 1.6;
+        @keyframes glitch-anim {
+            0% { transform: skewX(0deg); }
+            100% { transform: skewX(5deg); }
         }
-        
-        /* 個人資訊區塊 */
+        @keyframes glitch-before {
+            0% { clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%); transform: translate(10px, -5px); }
+            100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: translate(-10px, 5px); }
+        }
+        @keyframes glitch-after {
+            0% { clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%); transform: translate(-10px, 5px); }
+            100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: translate(10px, -5px); }
+        }
+
+        /* 資訊區塊 */
         .info-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            grid-area: info;
+            text-align: left;
             margin-top: 50px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 40px;
-            border-radius: 10px;
+        }
+        .contact-section {
+            grid-area: contact;
+            text-align: left;
+            margin-top: 50px;
         }
 
-        .info-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            width: 100%;
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            flex: 1 1 200px;
-        }
-
-        .info-item h3 {
-            font-size: 1.2rem;
-            margin: 0;
+        h2 {
+            font-size: 2rem;
             color: var(--accent-color);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
         }
 
-        .info-item p {
+        p {
+            margin: 10px 0;
             font-size: 1.1rem;
-            margin: 0;
-            color: var(--primary-color);
-        }
-        
-        /* RWD 響應式設計 */
-        @media (max-width: 768px) {
-            .name {
-                font-size: 6rem;
-            }
-            .slogan {
-                font-size: 1.5rem;
-            }
-            .intro-text {
-                font-size: 1rem;
-            }
-            .illustration {
-                width: 100px;
-                height: 100px;
-            }
-            .info-item {
-                flex: 1 1 100%;
-            }
         }
 
-        @media (max-width: 480px) {
-            .name {
-                font-size: 4rem;
+        .email-link {
+            color: var(--main-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--main-color);
+            transition: color 0.3s;
+        }
+        .email-link:hover {
+            color: var(--accent-color);
+            border-bottom: 1px dashed var(--accent-color);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            body {
+                display: block;
             }
-            .slogan {
-                font-size: 1.2rem;
+            .info-section, .contact-section {
+                margin-top: 20px;
+                text-align: center;
+            }
+            .name-container {
+                font-size: 15vw;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="illustration">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M 50,2 L 98,50 L 50,98 L 2,50 Z" />
-            <path d="M 50,25 L 75,50 L 50,75 L 25,50 Z" />
-        </svg>
+    <h1 class="name-container">yaji</h1>
+
+    <div class="info-section">
+        <h2>About</h2>
+        <p>一個數位探索者，希望創造令人印象深刻的視覺體驗。</p>
+        <p><b>出生日期</b>: 2003/01/14</p>
     </div>
 
-    <div class="container">
-        <h1 class="name">王亞婕</h1>
-        <p class="slogan">歡迎大家進入我的主頁</p>
-        <p class="intro-text">
-            一個數位探索者，<br>希望能創造令人印象深刻的視覺體驗。
-        </p>
-
-        <div class="info-section">
-            <div class="info-group">
-                <div class="info-item">
-                    <h3>出生日期</h3>
-                    <p>2003/01/14</p>
-                </div>
-                <div class="info-item">
-                    <h3>聯絡方式</h3>
-                    <p><a href="mailto:heyaji.w@gmail.com" style="color:var(--primary-color); text-decoration:none;">heyaji.w@gmail.com</a></p>
-                </div>
-            </div>
-            <div class="info-group">
-                <div class="info-item">
-                    <h3>電話</h3>
-                    <p>更新中...</p>
-                </div>
-                <div class="info-item">
-                    <h3>社群</h3>
-                    <p>更新中...</p>
-                </div>
-            </div>
-        </div>
-        </div>
+    <div class="contact-section">
+        <h2>Contact</h2>
+        <p><b>Email</b>: <a href="mailto:heyaji.w@gmail.com" class="email-link">heyaji.w@gmail.com</a></p>
+        <p><b>電話</b>: 更新中...</p>
+        <p><b>社群</b>: 更新中...</p>
+    </div>
 
 </body>
 </html>
