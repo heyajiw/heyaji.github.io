@@ -3,194 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我是 Yaji！</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>yaji</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* CSS 樣式區域 - 包含獨特背景、貓咪、字體和動態效果 */
+        /* CSS 樣式區域 */
+        :root {
+            --primary-color: #f0f0f0;  /* 主色：淺灰色 */
+            --secondary-color: #1a1a1a;  /* 副色：深灰色 */
+            --accent-color: #4a90e2;   /* 點綴色：藍色 */
+        }
+
         body {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-family: 'Noto Sans TC', sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             text-align: center;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif; /* 主要文字使用 Inter */
-            overflow: hidden; /* 防止背景動畫造成滾動條 */
-            position: relative; /* 用於定位背景元素 */
-            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%); /* 鮮豔的漸層背景 */
+            overflow: hidden;
+            position: relative;
         }
 
-        /* 獨特的背景動畫效果 */
-        .background-elements {
+        /* 抽象的幾何插圖 */
+        .illustration {
             position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            z-index: 0;
+            opacity: 0.15;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .illustration svg {
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            z-index: 0; /* 確保在內容下方 */
-        }
-
-        .background-elements span {
-            position: absolute;
-            display: block;
-            list-style: none;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.15); /* 半透明的白色方塊 */
-            animation: animate 25s linear infinite;
-            bottom: -150px; /* 從底部升起 */
-            border-radius: 50%; /* 讓背景元素變成圓形 */
-            filter: blur(2px); /* 輕微模糊效果 */
-        }
-
-        .background-elements span:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-        .background-elements span:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-        .background-elements span:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-        .background-elements span:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-        .background-elements span:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-        .background-elements span:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
-        .background-elements span:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
-        .background-elements span:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
-        .background-elements span:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
-        .background-elements span:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 11s; }
-
-        @keyframes animate {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
-            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
-        }
-
-        /* 貓咪 SVG */
-        .cat-icon {
-            position: absolute;
-            top: 20px; /* 調整貓咪位置 */
-            left: 20px;
-            width: 80px;
-            height: 80px;
-            z-index: 2; /* 確保在內容上方 */
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.3)); /* 貓咪陰影 */
-            animation: catBounce 3s ease-in-out infinite alternate; /* 貓咪跳動動畫 */
-        }
-        @keyframes catBounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
         }
 
         /* 內容容器 */
         .container {
             position: relative;
-            z-index: 1; /* 確保內容在背景上方 */
-            padding: 50px;
-            background: rgba(0, 0, 0, 0.6); /* 更深的半透明背景 */
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px); /* 更強的模糊效果 */
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            max-width: 900px;
+            z-index: 1;
+            max-width: 700px;
             width: 90%;
-            transition: all 0.5s ease;
-            transform: scale(0.98); /* 初始稍微縮小 */
-            animation: fadeInScale 1s ease-out forwards; /* 載入動畫 */
+            padding: 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
         }
 
-        @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* 姓名和標語 */
+        .name {
+            font-family: 'Unica One', cursive;
+            font-size: 8rem;
+            line-height: 1;
+            margin: 0;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .slogan {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            color: var(--accent-color);
         }
 
-        /* 標題字體和效果 */
-        .container h1 {
-            font-family: 'Pacifico', cursive; /* 標題使用 Pacifico 字體 */
-            font-weight: 400; /* Pacifico 的權重通常是 400 */
-            font-size: 4.5em; /* 標題更大 */
-            letter-spacing: 3px;
-            margin-bottom: 0.3em;
-            color: #FFD700; /* 金色標題 */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* 文字陰影 */
-            line-height: 1.1;
-        }
-
-        .container p {
+        /* 自我介紹與聯絡方式 */
+        .intro-text {
             font-weight: 300;
-            font-size: 1.3em; /* 段落字體更大 */
-            margin-bottom: 2em;
-            color: #e0e0e0;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            color: var(--primary-color);
+        }
+        
+        .contact-info {
+            font-size: 1.1rem;
+            margin-top: 20px;
         }
 
-        /* 按鈕樣式 */
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #f7b731; /* 鮮明的橘黃色 */
-            color: #1f1c2c;
+        .contact-info a {
+            color: var(--accent-color);
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--accent-color);
+            transition: color 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary-color);
         }
 
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.02);
-            background-color: #ff9900; /* 懸停時顏色變深 */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        /* 響應式設計 */
+        /* RWD 響應式設計 */
         @media (max-width: 768px) {
-            .container {
-                padding: 30px;
+            .name {
+                font-size: 6rem;
             }
-            .container h1 {
-                font-size: 3em;
+            .slogan {
+                font-size: 1.5rem;
             }
-            .container p {
-                font-size: 1em;
+            .intro-text {
+                font-size: 1rem;
             }
-            .cat-icon {
-                width: 60px;
-                height: 60px;
-                top: 10px;
-                left: 10px;
+            .illustration {
+                width: 100px;
+                height: 100px;
             }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-                width: 95%;
+            .name {
+                font-size: 4rem;
             }
-            .container h1 {
-                font-size: 2.2em;
-            }
-            .container p {
-                font-size: 0.9em;
-            }
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 0.9em;
+            .slogan {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-elements">
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+
+    <div class="illustration">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M 50,2 L 98,50 L 50,98 L 2,50 Z" />
+            <path d="M 50,25 L 75,50 L 50,75 L 25,50 Z" />
+        </svg>
     </div>
 
-    <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2a10 10 0 0 0-9.95 9.1L2 22l9-2 9 2-1-10.9A10 10 0 0 0 12 2z"></path>
-        <path d="M7 10h.01M17 10h.01M9 15h6"></path>
-    </svg>
-
     <div class="container">
-        <h1>嗨 :) 我是 yaji！</h1>
-
-        <p>歡迎來到我的頁面，我是王亞婕！</p>
-
-        <a href="https://github.com/heyajiw" class="cta-button">探索我的 GitHub 頁面！</a>
+        <h1 class="name">yaji</h1>
+        <p class="slogan">歡迎大家進入我的主頁</p>
+        <p class="intro-text">
+            一個數位探索者，致力於將美感與功能完美結合，<br>創造令人印象深刻的視覺體驗。
+        </p>
+        <p class="contact-info">聯絡方式: <a href="mailto:heyaji.w@gmail.com">heyaji.w@gmail.com</a></p>
     </div>
 
 </body>
