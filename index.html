@@ -8,11 +8,11 @@
     <style>
         /* CSS 變數：方便你調整顏色 */
         :root {
-            --bg-color: #121212; /* 深灰色背景 */
-            --text-color: #f0f0f0; /* 淺灰色文字 */
-            --accent-color: #bb86fc; /* 醒目的淡紫色 */
-            --border-color: #333333; /* 淺線條色 */
-            --rain-color: rgba(200, 200, 255, 0.3); /* 雨滴顏色 */
+            --bg-color: #2b2b2b; /* 較淺的深灰色 */
+            --text-color: #e0e0e0; /* 柔和的淺灰色文字 */
+            --accent-color: #9c27b0; /* 紫羅蘭色，更柔和 */
+            --border-color: #4a4a4a; /* 較淺的線條色 */
+            --rain-color: rgba(220, 220, 255, 0.4); /* 更透明、更淺的雨滴顏色 */
         }
 
         body {
@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        /* 動態下雨背景 */
+        /* 動態輕柔雨滴背景 */
         .rain-background {
             position: fixed;
             top: 0;
@@ -40,15 +40,15 @@
         .rain {
             position: absolute;
             background: var(--rain-color);
-            width: 2px;
-            height: 50px; /* 雨滴長度 */
-            animation: fall 1s linear infinite;
+            width: 1px; /* 更細的雨滴 */
+            height: 25px; /* 更短的雨滴 */
+            animation: soft-fall 2s linear infinite; /* 緩慢落下 */
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-100px) translateX(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(100vh) translateX(50px); opacity: 0; } /* 增加X軸位移模擬風 */
+        @keyframes soft-fall {
+            0% { transform: translateY(-50px) translateX(0); opacity: 0; }
+            30% { opacity: 0.8; } /* 增加可見時間 */
+            100% { transform: translateY(100vh) translateX(20px); opacity: 0; } /* 輕微X軸位移 */
         }
 
         /* JavaScript 會動態生成雨滴，並隨機化其位置和動畫延遲 */
@@ -244,7 +244,8 @@
                 <div class="profile-pic-container">
                     <img src="https://i.imgur.com/your-image-url.png" alt="個人頭像" class="profile-pic">
                 </div>
-                <h1>王亞婕</h1>
+                <h1>王亞建</h1>
+                <p>hey I'm yaji :)</p>
             </div>
 
             <div class="right-panel">
@@ -300,14 +301,17 @@
     <script>
         // JavaScript 產生動態下雨效果
         const rainCanvas = document.getElementById('rain-canvas');
-        const numberOfDrops = 100; // 雨滴數量
+        const numberOfDrops = 80; // 雨滴數量減少
+        const minDropLength = 15; // 最小雨滴長度
+        const maxDropLength = 35; // 最大雨滴長度
 
         for (let i = 0; i < numberOfDrops; i++) {
             const drop = document.createElement('div');
             drop.classList.add('rain');
             drop.style.left = Math.random() * 100 + 'vw';
-            drop.style.animationDelay = Math.random() * -5 + 's'; // 隨機延遲，避免同時落下
-            drop.style.animationDuration = Math.random() * 1 + 0.5 + 's'; // 隨機速度
+            drop.style.animationDelay = Math.random() * -8 + 's'; // 隨機延遲，更分散
+            drop.style.animationDuration = Math.random() * 2 + 1.5 + 's'; // 速度更慢
+            drop.style.height = Math.random() * (maxDropLength - minDropLength) + minDropLength + 'px'; // 隨機長度
             rainCanvas.appendChild(drop);
         }
     </script>
