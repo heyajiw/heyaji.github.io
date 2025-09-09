@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王亞婕的主頁 | yaji</title>
+    <title>歡迎來到我的主頁</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         /* CSS 變數：方便你調整顏色 */
@@ -12,6 +12,7 @@
             --text-color: #f0f0f0; /* 淺灰色文字 */
             --accent-color: #bb86fc; /* 醒目的淡紫色 */
             --border-color: #333333; /* 淺線條色 */
+            --rain-color: rgba(200, 200, 255, 0.3); /* 雨滴顏色 */
         }
 
         body {
@@ -24,25 +25,33 @@
             position: relative;
         }
 
-        /* 背景動態粒子效果 */
-        body::before {
-            content: '';
+        /* 動態下雨背景 */
+        .rain-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle, var(--accent-color) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.1;
+            pointer-events: none; /* 讓雨滴不影響滑鼠事件 */
             z-index: -1;
-            animation: move-bg 60s linear infinite;
+            overflow: hidden;
         }
 
-        @keyframes move-bg {
-            from { background-position: 0 0; }
-            to { background-position: 400px 400px; }
+        .rain {
+            position: absolute;
+            background: var(--rain-color);
+            width: 2px;
+            height: 50px; /* 雨滴長度 */
+            animation: fall 1s linear infinite;
         }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(100vh) translateX(50px); opacity: 0; } /* 增加X軸位移模擬風 */
+        }
+
+        /* JavaScript 會動態生成雨滴，並隨機化其位置和動畫延遲 */
 
         .container {
             display: flex;
@@ -100,30 +109,25 @@
         }
 
         .profile-pic-container {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 2px solid transparent;
+            width: 200px; /* 長方形寬度 */
+            height: 250px; /* 長方形高度 */
+            border-radius: 8px; /* 微圓角 */
             position: relative;
             margin: 0 auto 30px;
-            background: linear-gradient(45deg, var(--accent-color), var(--border-color)) padding-box,
-                        linear-gradient(45deg, var(--accent-color), transparent) border-box;
-            animation: pulse-border 2s infinite alternate;
+            overflow: hidden; /* 確保圖片不超出框 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 強烈陰影 */
+            transition: transform 0.3s ease-in-out;
         }
-
-        @keyframes pulse-border {
-            from { border-color: var(--border-color); }
-            to { border-color: var(--accent-color); }
+        
+        .profile-pic-container:hover {
+            transform: translateY(-5px); /* 懸停時輕微上浮 */
         }
 
         .profile-pic {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            position: relative;
-            z-index: 2;
-            padding: 5px; /* 留出空間給光暈 */
+            object-fit: cover; /* 確保圖片填滿容器 */
+            display: block;
         }
 
         .left-panel h1 {
@@ -219,9 +223,11 @@
 </head>
 <body>
 
+    <div class="rain-background" id="rain-canvas"></div>
+
     <div class="container">
         <div class="header">
-            <h1 style="margin:0; font-family: 'Poppins', sans-serif;">王亞建的主頁</h1>
+            <h1 style="margin:0; font-family: 'Poppins', sans-serif;">王亞婕的主頁</h1>
             <div class="social-icons">
                 <a href="mailto:heyaji.w@gmail.com" class="email-link">Email: heyaji.w@gmail.com</a>
                 <a href="https://github.com/heyajiw" target="_blank">
@@ -238,7 +244,7 @@
                 <div class="profile-pic-container">
                     <img src="https://i.imgur.com/your-image-url.png" alt="個人頭像" class="profile-pic">
                 </div>
-                <h1>王亞建</h1>
+                <h1>王亞婕</h1>
             </div>
 
             <div class="right-panel">
@@ -261,29 +267,27 @@
                     <ul>
                         <li><b>《社會狀況、年齡、退休預期與風險偏好對投資行為與投資組合調整的影響》</b>
                             <ul>
-                                <ul>
-                                
                                 <li>分析理財偏好與年齡層之間的對應關係</li>
                             </ul>
                         </li>
                         <li><b>《保險是一個正常財嗎?》</b>
                             <ul>
-                                <ul>
-                                
                                 <li>探討所得、風險偏好與預防性儲蓄對長期保險需求的影響</li>
                                 <li>驗證保險需求是否隨財富上升，呈現正常財的消費特性</li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-            <div class="content-block">
-                <h2>證照</h2>
-                <ul>
-                    <li>金融市場道德與職業道德</li>
-                    <li>GA4</li>
-                    <li>TQC PPT</li>
-                </ul>
-            </div>
+
+                <div class="content-block">
+                    <h2>證照</h2>
+                    <ul>
+                        <li>金融市場道德與職業道德</li>
+                        <li>GA4</li>
+                        <li>TQC PPT</li>
+                    </ul>
+                </div>
+                
                 <div class="content-block">
                     <h2>聯絡方式</h2>
                     <p><b>Email</b>: heyaji.w@gmail.com</p>
@@ -292,5 +296,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript 產生動態下雨效果
+        const rainCanvas = document.getElementById('rain-canvas');
+        const numberOfDrops = 100; // 雨滴數量
+
+        for (let i = 0; i < numberOfDrops; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('rain');
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.animationDelay = Math.random() * -5 + 's'; // 隨機延遲，避免同時落下
+            drop.style.animationDuration = Math.random() * 1 + 0.5 + 's'; // 隨機速度
+            rainCanvas.appendChild(drop);
+        }
+    </script>
 </body>
 </html>
