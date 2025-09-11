@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>heyaji</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>hyaji</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* CSS 變數：調整為清晨淺色系 */
+        /* 新增：馬卡龍色系變數 */
         :root {
-            --bg-color: #e0f2f1; /* 柔和的淺青色，像清晨的霧 */
-            --text-color: #2c3e50; /* 深藍色文字，清晰易讀 */
-            --accent-color: #4a90e2; /* 淺藍色，作為點綴色 */
-            --border-color: #b2dfdb; /* 淺線條色 */
+            --macaron-pink: #ffc2d1;
+            --macaron-blue: #b4e0f6;
+            --macaron-green: #c1f2b1;
+            --macaron-yellow: #fff5ba;
+            --text-color-dark: #374259;
+            --text-color-light: #6c7a89;
+            --container-bg: rgba(255, 255, 255, 0.7);
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--macaron-blue);
+            color: var(--text-color-dark);
             font-family: 'Noto Sans TC', sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
             position: relative;
-
-            /* 新的漸層背景：明亮、正式且有創意 */
-            background: linear-gradient(-45deg, #e0f2f1, #ffffff, #d9f3f3, #eaf9ff);
+            background: linear-gradient(135deg, var(--macaron-blue) 0%, var(--macaron-green) 25%, var(--macaron-yellow) 50%, var(--macaron-pink) 75%, var(--macaron-blue) 100%);
             background-size: 400% 400%;
             animation: gradient-animation 15s ease infinite;
         }
 
-        /* 漸層動畫 */
         @keyframes gradient-animation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -47,11 +47,11 @@
             z-index: 1;
         }
 
-        /* 頂部導覽列 */
+        /* 頂部導覽列優化 */
         .header {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* 將元素靠右 */
             align-items: center;
             margin-bottom: 50px;
             padding: 20px 0;
@@ -63,18 +63,13 @@
         }
 
         .social-icons a {
-            color: var(--text-color);
+            color: var(--text-color-light);
             text-decoration: none;
             transition: color 0.3s;
         }
 
         .social-icons a:hover {
-            color: var(--accent-color);
-        }
-
-        .email-link {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 300;
+            color: var(--text-color-dark);
         }
 
         /* 主要內容區塊 */
@@ -92,6 +87,24 @@
             min-width: 300px;
             text-align: center;
         }
+        
+        /* 姓名與職稱設計 */
+        .left-panel h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem; /* 名字縮小 */
+            font-weight: 500;
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: var(--text-color-dark);
+        }
+
+        .left-panel p.subtitle {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 300;
+            color: var(--text-color-light);
+        }
 
         .profile-pic-container {
             width: 200px;
@@ -100,14 +113,14 @@
             position: relative;
             margin: 0 auto 30px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--text-color-light);
         }
         
         .profile-pic-container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-color);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
 
         .profile-pic {
@@ -117,37 +130,23 @@
             display: block;
         }
 
-        .left-panel h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-top: 0;
-            color: var(--text-color);
-        }
-
-        .left-panel p {
-            font-family: 'Noto Sans TC', sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-        
         /* 標題與內文排版 */
         .content-block {
             margin-bottom: 40px;
-            background-color: rgba(255, 255, 255, 0.5); /* 內容塊半透明背景 */
-            backdrop-filter: blur(5px); /* 玻璃霧化效果 */
+            background-color: var(--container-bg); /* 內容塊半透明背景 */
+            backdrop-filter: blur(10px); /* 玻璃霧化效果增強 */
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px; /* 邊角更圓潤 */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 增加邊框層次感 */
         }
 
         .content-block h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
             font-weight: 400;
-            color: var(--accent-color);
-            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color-dark);
+            border-bottom: 1px solid var(--text-color-light);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
@@ -162,11 +161,12 @@
             padding-left: 20px;
             margin-bottom: 10px;
             font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         .content-block li::before {
             content: "•";
-            color: var(--accent-color);
+            color: var(--macaron-pink);
             position: absolute;
             left: 0;
             font-size: 1.5rem;
@@ -174,12 +174,12 @@
         }
         
         .content-block a {
-            color: var(--text-color);
+            color: var(--text-color-dark);
             text-decoration: underline;
         }
         
         .content-block a:hover {
-            color: var(--accent-color);
+            color: var(--macaron-pink);
         }
 
         /* 右側 - 詳細資訊 */
@@ -191,12 +191,8 @@
         /* RWD 響應式設計 */
         @media (max-width: 768px) {
             .header {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-            .email-link {
-                margin-top: 10px;
+                justify-content: center;
+                margin-bottom: 30px;
             }
             .main-section {
                 flex-direction: column;
@@ -221,9 +217,10 @@
 
     <div class="container">
         <div class="header">
-            <h1 style="margin:0; font-family: 'Poppins', sans-serif;">王亞婕 - 個人主頁</h1>
             <div class="social-icons">
-                <a href="mailto:heyaji.w@gmail.com" class="email-link">Email: heyaji.w@gmail.com</a>
+                <a href="mailto:heyaji.w@gmail.com" title="聯絡我">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
                 <a href="https://github.com/heyajiw" target="_blank" title="GitHub">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.8c0-1.4-.5-2-2-2-4 0-5.5 3-5.5 3-1.5 2.5-2 3-2.5 3-1 .5-1.5 0-1.5-1.5 0-1 .5-2 1-2.5-4-.5-6 2-6 5.5s2 6 6 6 6.5-1.5 6.5-1.5-2-.5-2.5-.5c-.5-.5-1-1-1-1.5-1-1.5-1.5-2-1.5-3.5 0-3.5 2-6 6-6 1.5 0 2 1 2 2z"/></svg>
                 </a>
@@ -239,7 +236,7 @@
                     <img src="https://i.imgur.com/your-image-url.png" alt="個人頭像" class="profile-pic">
                 </div>
                 <h1>王亞婕</h1>
-                <p>一位充滿熱情的數位創作者與學習者</p>
+                <p class="subtitle"></p>
             </div>
 
             <div class="right-panel">
